@@ -213,7 +213,6 @@ class _TrangChuState extends State<TrangChu> {
                 ),
                 Column(
                   children: data.asMap().entries.map((entry) {
-                    final int index = entry.key;
                     final Map<String, dynamic> taikhoan = entry.value;
                     final dateTime = taikhoan['ngaythang'] as DateTime;
                     const totalMinutes = 100;
