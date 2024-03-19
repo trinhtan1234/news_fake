@@ -165,35 +165,218 @@ class _ChoBanState extends State<ChoBan> {
                   ],
                 ),
               ),
-              Container(
-                height: 500,
-                color: const Color.fromARGB(255, 231, 239, 243),
+              const Padding(padding: EdgeInsets.only(top: 10)),
+              SizedBox(
+                height: 530,
+                // color: const Color.fromARGB(255, 231, 239, 243),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     if (data.isNotEmpty)
                       if (data.any(
                           (news) => news['phanloai'] == 'Tin bài hàng đầu'))
-                        SizedBox(
-                          height: 200,
-                          width: 400,
-                          child: Image.network(
-                            data.firstWhere((news) =>
-                                news['phanloai'] ==
-                                'Tin bài hàng đầu')['imagetieude'],
-                            fit: BoxFit.cover,
+                        const Padding(padding: EdgeInsets.only(top: 10)),
+                    SizedBox(
+                      height: 200,
+                      width: 400,
+                      child: Image.network(
+                        data.firstWhere((news) =>
+                            news['phanloai'] ==
+                            'Tin bài hàng đầu')['imagetieude'],
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.only(top: 5)),
+                    Text(
+                      data.isNotEmpty
+                          ? data.firstWhere((news) =>
+                                  news['phanloai'] ==
+                                  'Tin bài hàng đầu')['nguontrang'] ??
+                              ''
+                          : '',
+                    ),
+                    const Padding(padding: EdgeInsets.only(top: 5)),
+                    Text(
+                      data.isNotEmpty
+                          ? data.firstWhere((news) =>
+                                  news['phanloai'] ==
+                                  'Tin bài hàng đầu')['tieude'] ??
+                              ''
+                          : '',
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          data.isNotEmpty
+                              ? DateFormat('EEEE, dd-MM-yyyy', 'vi').format(
+                                  data.firstWhere((news) =>
+                                          news['phanloai'] ==
+                                          'Tin bài hàng đầu')['ngaytao'] ??
+                                      DateTime.now())
+                              : '',
+                        ),
+                        Row(
+                          children: [
+                            IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.collections_bookmark,
+                                size: 20,
+                                color: Colors.green,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.more_horiz,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                    const Divider(),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                data.length > 1 &&
+                                        data[1]['phanloai'] ==
+                                            'Tin bài hàng đầu'
+                                    ? data[1]['nguontrang'] ?? ''
+                                    : '',
+                              ),
+                              Text(
+                                data.length > 1 &&
+                                        data[1]['phanloai'] ==
+                                            'Tin bài hàng đầu'
+                                    ? data[1]['tieude'] ?? ''
+                                    : '',
+                              ),
+                              Text(
+                                data.isNotEmpty
+                                    ? DateFormat('EEEE, dd-MM-yyyy', 'vi')
+                                        .format(data.firstWhere((news) =>
+                                                    news['phanloai'] ==
+                                                    'Tin bài hàng đầu')[
+                                                'ngaytao'] ??
+                                            DateTime.now())
+                                    : '',
+                              ),
+                            ],
                           ),
                         ),
-                    Text(data.isNotEmpty
-                        ? data.firstWhere((news) =>
-                                news['phanloai'] ==
-                                'Tin bài hàng đầu')['tieude'] ??
-                            ''
-                        : ''),
+                        Column(
+                          children: [
+                            Image.network(
+                              data.length > 1 &&
+                                      data[1]['phanloai'] == 'Tin bài hàng đầu'
+                                  ? data[1]['imagetieude'] ?? ''
+                                  : '',
+                              height: 50,
+                              width: 50,
+                              fit: BoxFit.cover,
+                            ),
+                            Row(
+                              children: [
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.collections_bookmark,
+                                    size: 20,
+                                    color: Colors.green,
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.more_horiz,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                    const Divider(),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                data.length > 1 &&
+                                        data[1]['phanloai'] ==
+                                            'Tin bài hàng đầu'
+                                    ? data[1]['nguontrang'] ?? ''
+                                    : '',
+                              ),
+                              Text(
+                                data.length > 1 &&
+                                        data[1]['phanloai'] ==
+                                            'Tin bài hàng đầu'
+                                    ? data[1]['tieude'] ?? ''
+                                    : '',
+                              ),
+                              Text(
+                                data.isNotEmpty
+                                    ? DateFormat('EEEE, dd-MM-yyyy', 'vi')
+                                        .format(data.firstWhere((news) =>
+                                                    news['phanloai'] ==
+                                                    'Tin bài hàng đầu')[
+                                                'ngaytao'] ??
+                                            DateTime.now())
+                                    : '',
+                              ),
+                            ],
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            Image.network(
+                              data.length > 1 &&
+                                      data[1]['phanloai'] == 'Tin bài hàng đầu'
+                                  ? data[1]['imagetieude'] ?? ''
+                                  : '',
+                              height: 50,
+                              width: 50,
+                              fit: BoxFit.cover,
+                            ),
+                            Row(
+                              children: [
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.collections_bookmark,
+                                    size: 20,
+                                    color: Colors.green,
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.more_horiz,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                    const Divider(),
                   ],
                 ),
               ),
-
               Container(
                 height: 400,
                 color: const Color.fromARGB(255, 212, 238, 225),
@@ -202,101 +385,6 @@ class _ChoBanState extends State<ChoBan> {
                 height: 400,
                 color: const Color.fromARGB(255, 214, 216, 197),
               )
-              // SizedBox(
-              //   height: 400,
-              //   child: ListView.separated(
-              //     scrollDirection: Axis.vertical,
-              //     itemCount: min(
-              //         3,
-              //         data
-              //             .where(
-              //                 (news) => news['phanloai'] == 'Tin bài hàng đầu')
-              //             .length),
-              //     separatorBuilder: (context, index) {
-              //       return const SizedBox(height: 0);
-              //     },
-              //     itemBuilder: (context, index) {
-              //       final List<Map<String, dynamic>> filteredNews = data
-              //           .where((news) => news['phanloai'] == 'Tin bài hàng đầu')
-              //           .toList();
-              //       final Map<String, dynamic> news = filteredNews[index];
-              //       final dateTime = news['ngaytao'] as DateTime;
-              //       const totalMinutes = 100;
-              //       const hours = totalMinutes ~/ 60;
-              //       const minutes = totalMinutes % 60;
-              //       final formattedTime =
-              //           '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')} ${dateTime.day}-${dateTime.month}-${dateTime.year}';
-              //       final bool isFirstItem = index == 0;
-              //       return Column(
-              //         children: [
-              //           Container(
-              //             color: Color.fromARGB(255, 241, 230, 230),
-              //             child: Column(
-              //               crossAxisAlignment: CrossAxisAlignment.start,
-              //               children: [
-              //                 Container(
-              //                   child:
-              //                       isFirstItem && news['imagetieude'] != null
-              //                           ? Container(
-              //                               height: 200,
-              //                               width: 400,
-              //                               // color: Colors.grey,
-              //                               child: Image.network(
-              //                                 news['imagetieude'],
-              //                                 fit: BoxFit.cover,
-              //                               ),
-              //                             )
-              //                           : const SizedBox.shrink(),
-              //                 ),
-              //                 TextButton(
-              //                   onPressed: () {},
-              //                   child: Text(
-              //                     news['nguontrang'] ?? '',
-              //                     style: const TextStyle(
-              //                         // color: Colors.black,
-              //                         ),
-              //                   ),
-              //                 ),
-              //                 Text(news['tieude'] ?? ''),
-              //                 const Padding(padding: EdgeInsets.only(top: 10)),
-              //                 Row(
-              //                   mainAxisAlignment:
-              //                       MainAxisAlignment.spaceBetween,
-              //                   children: [
-              //                     Text(formattedTime),
-              //                     Row(
-              //                       children: [
-              //                         IconButton(
-              //                           onPressed: () {},
-              //                           icon: const Icon(
-              //                             Icons.collections_bookmark,
-              //                             color: Colors.green,
-              //                           ),
-              //                         ),
-              //                         IconButton(
-              //                           onPressed: () {},
-              //                           icon: const Icon(
-              //                             Icons.more_horiz,
-              //                             color: Colors.black,
-              //                           ),
-              //                         ),
-              //                       ],
-              //                     ),
-              //                   ],
-              //                 ),
-              //                 Divider(),
-              //               ],
-              //             ),
-              //           ),
-              //         ],
-              //       );
-              //     },
-              //   ),
-              // ),
-              // Container(
-              //   height: 200,
-              //   color: Colors.blueAccent,
-              // )
             ],
           ),
         ),
