@@ -104,10 +104,10 @@ class _ChoBanState extends State<ChoBan> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10),
+        child: Container(
+          margin: EdgeInsets.all(5),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -147,28 +147,9 @@ class _ChoBanState extends State<ChoBan> {
                   ),
                 ],
               ),
-              const Padding(padding: EdgeInsets.only(top: 10)),
-              TextButton(
-                onPressed: () {},
-                child: const Row(
-                  children: [
-                    Text(
-                      'Tin bài hàng đầu',
-                      style: TextStyle(
-                        color: Colors.blue,
-                      ),
-                    ),
-                    Icon(
-                      Icons.chevron_right,
-                      color: Colors.blue,
-                    ),
-                  ],
-                ),
-              ),
-              const Padding(padding: EdgeInsets.only(top: 10)),
-              SizedBox(
-                height: 530,
-                // color: const Color.fromARGB(255, 231, 239, 243),
+              Container(
+                height: 600,
+                color: Color.fromARGB(255, 193, 223, 169),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -176,6 +157,23 @@ class _ChoBanState extends State<ChoBan> {
                       if (data.any(
                           (news) => news['phanloai'] == 'Tin bài hàng đầu'))
                         const Padding(padding: EdgeInsets.only(top: 10)),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Row(
+                        children: [
+                          Text(
+                            'Tin bài hàng đầu',
+                            style: TextStyle(
+                              color: Colors.blue,
+                            ),
+                          ),
+                          Icon(
+                            Icons.chevron_right,
+                            color: Colors.blue,
+                          ),
+                        ],
+                      ),
+                    ),
                     SizedBox(
                       height: 200,
                       width: 400,
@@ -208,12 +206,10 @@ class _ChoBanState extends State<ChoBan> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          data.isNotEmpty
-                              ? DateFormat('EEEE, dd-MM-yyyy', 'vi').format(
-                                  data.firstWhere((news) =>
-                                          news['phanloai'] ==
-                                          'Tin bài hàng đầu')['ngaytao'] ??
-                                      DateTime.now())
+                          data.isNotEmpty &&
+                                  data[0]['phanloai'] == 'Tin bài hàng đầu'
+                              ? DateFormat('HH:mm dd-MM-yyyy')
+                                  .format(data[0]['ngaytao'] ?? DateTime.now())
                               : '',
                         ),
                         Row(
@@ -259,13 +255,11 @@ class _ChoBanState extends State<ChoBan> {
                                     : '',
                               ),
                               Text(
-                                data.isNotEmpty
-                                    ? DateFormat('EEEE, dd-MM-yyyy', 'vi')
-                                        .format(data.firstWhere((news) =>
-                                                    news['phanloai'] ==
-                                                    'Tin bài hàng đầu')[
-                                                'ngaytao'] ??
-                                            DateTime.now())
+                                data.length > 1 &&
+                                        data[1]['phanloai'] ==
+                                            'Tin bài hàng đầu'
+                                    ? DateFormat('HH:mm dd-MM-yyyy').format(
+                                        data[1]['ngaytao'] ?? DateTime.now())
                                     : '',
                               ),
                             ],
@@ -313,27 +307,25 @@ class _ChoBanState extends State<ChoBan> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                data.length > 1 &&
-                                        data[1]['phanloai'] ==
+                                data.length > 2 &&
+                                        data[2]['phanloai'] ==
                                             'Tin bài hàng đầu'
-                                    ? data[1]['nguontrang'] ?? ''
+                                    ? data[2]['nguontrang'] ?? ''
                                     : '',
                               ),
                               Text(
-                                data.length > 1 &&
-                                        data[1]['phanloai'] ==
+                                data.length > 2 &&
+                                        data[2]['phanloai'] ==
                                             'Tin bài hàng đầu'
-                                    ? data[1]['tieude'] ?? ''
+                                    ? data[2]['tieude'] ?? ''
                                     : '',
                               ),
                               Text(
-                                data.isNotEmpty
-                                    ? DateFormat('EEEE, dd-MM-yyyy', 'vi')
-                                        .format(data.firstWhere((news) =>
-                                                    news['phanloai'] ==
-                                                    'Tin bài hàng đầu')[
-                                                'ngaytao'] ??
-                                            DateTime.now())
+                                data.length > 2 &&
+                                        data[2]['phanloai'] ==
+                                            'Tin bài hàng đầu'
+                                    ? DateFormat('HH:mm dd-MM-yyyy').format(
+                                        data[2]['ngaytao'] ?? DateTime.now())
                                     : '',
                               ),
                             ],
@@ -342,9 +334,9 @@ class _ChoBanState extends State<ChoBan> {
                         Column(
                           children: [
                             Image.network(
-                              data.length > 1 &&
-                                      data[1]['phanloai'] == 'Tin bài hàng đầu'
-                                  ? data[1]['imagetieude'] ?? ''
+                              data.length > 2 &&
+                                      data[2]['phanloai'] == 'Tin bài hàng đầu'
+                                  ? data[2]['imagetieude'] ?? ''
                                   : '',
                               height: 50,
                               width: 50,
@@ -378,8 +370,150 @@ class _ChoBanState extends State<ChoBan> {
                 ),
               ),
               Container(
-                height: 400,
-                color: const Color.fromARGB(255, 212, 238, 225),
+                height: 300,
+                color: const Color.fromARGB(255, 231, 239, 243),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (data.isNotEmpty)
+                      if (data.any(
+                          (news) => news['phanloai'] == 'Tin bài hàng đầu'))
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    data.length > 1 &&
+                                            data[1]['phanloai'] ==
+                                                'Tin bài hàng đầu'
+                                        ? data[1]['nguontrang'] ?? ''
+                                        : '',
+                                  ),
+                                  Text(
+                                    data.length > 1 &&
+                                            data[1]['phanloai'] ==
+                                                'Tin bài hàng đầu'
+                                        ? data[1]['tieude'] ?? ''
+                                        : '',
+                                  ),
+                                  Text(
+                                    data.length > 1 &&
+                                            data[1]['phanloai'] ==
+                                                'Tin bài hàng đầu'
+                                        ? DateFormat('HH:mm dd-MM-yyyy').format(
+                                            data[1]['ngaytao'] ??
+                                                DateTime.now())
+                                        : '',
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Column(
+                              children: [
+                                Image.network(
+                                  data.length > 1 &&
+                                          data[1]['phanloai'] ==
+                                              'Tin bài hàng đầu'
+                                      ? data[1]['imagetieude'] ?? ''
+                                      : '',
+                                  height: 50,
+                                  width: 50,
+                                  fit: BoxFit.cover,
+                                ),
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.collections_bookmark,
+                                        size: 20,
+                                        color: Colors.green,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.more_horiz,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                    const Divider(),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                data.length > 2 &&
+                                        data[2]['phanloai'] ==
+                                            'Tin bài hàng đầu'
+                                    ? data[2]['nguontrang'] ?? ''
+                                    : '',
+                              ),
+                              Text(
+                                data.length > 2 &&
+                                        data[2]['phanloai'] ==
+                                            'Tin bài hàng đầu'
+                                    ? data[2]['tieude'] ?? ''
+                                    : '',
+                              ),
+                              Text(
+                                data.length > 2 &&
+                                        data[2]['phanloai'] ==
+                                            'Tin bài hàng đầu'
+                                    ? DateFormat('HH:mm dd-MM-yyyy').format(
+                                        data[2]['ngaytao'] ?? DateTime.now())
+                                    : '',
+                              ),
+                            ],
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            Image.network(
+                              data.length > 2 &&
+                                      data[2]['phanloai'] == 'Tin bài hàng đầu'
+                                  ? data[2]['imagetieude'] ?? ''
+                                  : '',
+                              height: 50,
+                              width: 50,
+                              fit: BoxFit.cover,
+                            ),
+                            Row(
+                              children: [
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.collections_bookmark,
+                                    size: 20,
+                                    color: Colors.green,
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.more_horiz,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                    const Divider(),
+                  ],
+                ),
               ),
               Container(
                 height: 400,
